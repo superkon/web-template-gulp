@@ -1,0 +1,135 @@
+@import "../mix";
+@import "../base";
+@import "../config";
+
+/******************************
+TEXT STYLE FUNCTION
+******************************/
+@mixin textStyle($style: default, $config: $config__text, $lang: null)
+{
+  //@debug $style;
+
+  //check if the value is in the array
+  @if (map-get($config, $style) != null)
+  {
+  //Assume Font Family will be the same in any devices
+  	font-family: map-get(map-get($config, $style), family);
+
+    @for $i from 0 to length($base__devices)
+  	{
+      $className: "."+unquote(nth($base__devices, $i+1))+" &";
+
+      @if ($lang != null)
+      {
+        //$className: "."+unquote($lang)+"."+unquote(nth($base__devices, $i+1))+" &";
+        $className: "[data-lang="+unquote($lang)+"]."+unquote(nth($base__devices, $i+1))+" &";
+      }
+
+      @if ($style == body)
+      {
+        $className: "&."+unquote(nth($base__devices, $i+1));
+      }
+
+			#{$className}
+  		{
+        @include textStyle__cssGenerator($style, $config, $lang, $i);
+  		}
+  	}
+  }
+}
+
+@mixin textStyle__cssGenerator($style, $config, $lang, $i)
+{
+  @if (map-get(map-get($config, $style), size) != null)
+  {
+    font-size: nth(map-get(map-get($config, $style), size), $i+1);
+  }
+  @if (map-get(map-get($config, $style), lineHeight) != null)
+  {
+    line-height: nth(map-get(map-get($config, $style), lineHeight), $i+1);
+  }
+  @if (map-get(map-get($config, $style), letterSpacing) != null)
+  {
+    letter-spacing: nth(map-get(map-get($config, $style), letterSpacing), $i+1);
+  }
+  @if (map-get(map-get($config, $style), weight) != null)
+  {
+    font-weight: nth(map-get(map-get($config, $style), weight), $i+1);
+  }
+  @if (map-get(map-get($config, $style), margin) != null)
+  {
+    margin: nth(map-get(map-get($config, $style), margin), $i+1);
+  }
+  @if (map-get(map-get($config, $style), color) != null)
+  {
+    color: nth(map-get(map-get($config, $style), color), $i+1);
+  }
+  //ADD NEW COMMON STYLE IN HERE IF ANY...
+}
+
+@mixin textStyle__init($config, $lang: null)
+{
+	//@debug map-keys($config);
+
+	@for $i from 0 to length($config)
+	{
+		$name : unquote(nth(map-keys($config), $i+1));
+		$type : map-get(map-get($config, $name), type);
+
+		//@debug $type;
+
+		@if ($type != skip)
+		{
+			$className : null;
+
+			@if ($type == default) or ($type == null)
+			{
+				$className : $name;
+			}
+
+			@if ($type == class)
+			{
+				$className : '.'+$name;
+			}
+
+			@if ($type == id)
+			{
+				$className : '#'+$name;
+			}
+
+			#{$className}
+			{
+				@include textStyle($name, $config, $lang);
+			}
+		}
+	}
+}
+
+/******************************
+TEXT STYLE
+******************************/
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+{
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+  margin: 0px auto;
+
+  small, .small
+  {
+    font-size: 65%;
+    line-height: 1;
+    color: $text__color_baseSmall;
+  }
+}
+
+p
+{
+  font-family: inherit;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: inherit;
+  margin: 0px auto 10px;
+}

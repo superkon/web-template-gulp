@@ -1,0 +1,88 @@
+@import "mix";
+
+/******************************
+BASE SETTING -- FIXED
+******************************/
+$BASE__FONTSIZE: 16; //16px = 1em fixed
+
+/******************************
+BASE SETTING
+******************************/
+$base__devices: ('desktop', 'tablet', 'mobile') !default;
+$base__windowWidth: 1920 !default; //in 1920px size, the font size is 15px
+
+/******************************
+BASE COLOR
+******************************/
+$color__primary_black : #000000 !default;
+$color__primary_white : #FFFFFF !default;
+$color__primary_grey : #666666 !default;
+
+$text__color_base : #333333 !default;
+$text__color_baseSmall : #666666 !default;
+
+
+
+/******************************
+BASE FONT
+******************************/
+$text__family_sans: 'Helvetica', Arial, '微軟正黑體', 'Microsoft JhengHei', 'Heiti TC', 'LiHei Pro', '新細明體', 'PMingLiU', sans-serif !default;
+$text__family_serif: 'Times New Roman', Times, serif, '微軟正黑體', 'Microsoft JhengHei', 'Heiti TC', 'LiHei Pro', '新細明體', 'PMingLiU', sans-serif !default;
+
+$config__text:
+(
+  'body':
+  (
+    type: 'default',
+    family: $text__family_sans,
+    color: ($text__color_base, $text__color_base, $text__color_base)
+  ),
+  'default':
+  (
+    type: 'skip'
+  ),
+  'h1':
+	(
+    family: $text__family_serif,
+    size: (em(36),em(36),em(36)),
+    letterSpacing: (0, 0, 0)
+	),
+  'h2':
+	(
+    size: (em(30),em(30),em(30)),
+    letterSpacing: (0, 0, 0)
+	),
+  'h3':
+	(
+    size: (em(24),em(24),em(24)),
+    letterSpacing: (0, 0, 0)
+	),
+  'h4':
+	(
+    size: (em(18),em(18),em(18)),
+    letterSpacing: (0, 0, 0)
+	),
+  'h5':
+	(
+    size: (em(14),em(14),em(14)),
+    letterSpacing: (0, 0, 0)
+	),
+  'h6':
+	(
+    size: (em(12),em(12),em(12)),
+    letterSpacing: (0, 0, 0)
+	),
+  'p':
+	(
+    size: (em(14),em(14),em(14)),
+    letterSpacing: (0, 0, 0)
+	),
+  'caption':
+	(
+    type: 'class'
+	)
+)!default;
+
+/******************************
+BASE FORM
+******************************/

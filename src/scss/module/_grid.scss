@@ -1,0 +1,235 @@
+@import "../mix";
+@import "../base";
+@import "../config";
+
+/******************************
+BASE GRID
+******************************/
+$grid__number : 12 !default;
+$grid__gutter : (30px, 30px, 0px) !default;
+
+/******************************
+GRID STYLE FUNCTION
+******************************/
+@mixin grid__cssGenerator($_width, $_pLeft, $_pRight)
+{
+  width: $_width ;
+  padding-left: $_pLeft;
+  padding-right: $_pRight;
+}
+
+@mixin grid__init($pGrid__number: $grid__number, $pGrid__gutter: $grid__gutter)
+{
+  @for $i from 1 through $pGrid__number
+	{
+    $_width : #{(1/$pGrid__number)*100%*$i};
+    $_pLeft : nth($pGrid__gutter, 1)/2;
+    $_pRight : nth($pGrid__gutter, 1)/2;
+
+		.cGrid__#{$i}-#{$pGrid__number}
+		{
+			@include grid__cssGenerator($_width, $_pLeft, $_pRight);
+		}
+
+    @for $j from 0 to length($base__devices)
+  	{
+      $className: "."+unquote(nth($base__devices, $j+1))+" &";
+      $classSlice: str-slice($className, 2, 2);
+
+      $_pLeft : nth($pGrid__gutter, $j+1)/2;
+      $_pRight : nth($pGrid__gutter, $j+1)/2;
+
+      #{$className} .cGrid__#{$i}-#{$pGrid__number}_#{$classSlice}
+  		{
+        @include grid__cssGenerator($_width, $_pLeft, $_pRight);
+  		}
+    }
+	}
+
+  @for $i from 1 through $pGrid__number
+	{
+		.colOffset__#{$i}-#{$pGrid__number}
+		{
+      margin-left: #{(1/$pGrid__number)*100%*$i};
+		}
+
+    @for $j from 0 to length($base__devices)
+  	{
+      $className: "."+unquote(nth($base__devices, $j+1))+" &";
+      $classSlice: str-slice($className, 2, 2);
+
+      #{$className} .colOffset__#{$i}-#{$pGrid__number}_#{$classSlice}
+  		{
+  			margin-left: #{(1/$pGrid__number)*100%*$i};
+  		}
+    }
+	}
+}
+
+//@include grid__init($grid__number, $grid__gutter);
+
+@mixin tableGrid__init($pGrid__number: $grid__number, $pGrid__gutter: $grid__gutter)
+{
+  @for $i from 1 through $pGrid__number
+	{
+    $_width : #{(1/$pGrid__number)*100%*$i};
+    $_pLeft : nth($pGrid__gutter, 1)/2;
+    $_pRight : nth($pGrid__gutter, 1)/2;
+
+		.tGrid__#{$i}-#{$pGrid__number}
+		{
+			@include grid__cssGenerator($_width, $_pLeft, $_pRight);
+		}
+
+    @for $j from 0 to length($base__devices)
+  	{
+      $className: "."+unquote(nth($base__devices, $j+1))+" &";
+      $classSlice: str-slice($className, 2, 2);
+
+      $_pLeft : nth($pGrid__gutter, $j+1)/2;
+      $_pRight : nth($pGrid__gutter, $j+1)/2;
+
+      #{$className} .tGrid__#{$i}-#{$pGrid__number}_#{$classSlice}
+  		{
+        @include grid__cssGenerator($_width, $_pLeft, $_pRight);
+  		}
+    }
+	}
+
+  @for $i from 1 through $pGrid__number
+	{
+		.tableOffset__#{$i}-#{$pGrid__number}
+		{
+      margin-left: #{(1/$pGrid__number)*100%*$i};
+		}
+
+    @for $j from 0 to length($base__devices)
+  	{
+      $className: "."+unquote(nth($base__devices, $j+1))+" &";
+      $classSlice: str-slice($className, 2, 2);
+
+      #{$className} .tableOffset__#{$i}-#{$pGrid__number}_#{$classSlice}
+  		{
+  			margin-left: #{(1/$pGrid__number)*100%*$i};
+  		}
+    }
+	}
+}
+
+@include tableGrid__init($grid__number, $grid__gutter);
+
+/*
+.grid__overide
+{
+  @include grid__init(16, (0px, 0px, 0px));
+}
+*/
+
+/******************************
+GRID STYLE
+******************************/
+*
+{
+  box-sizing: border-box;
+}
+
+/******************************
+COLUMN GRID
+******************************/
+[class*="cGrid__"]
+{
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #666;
+
+  .middle &
+  {
+    vertical-align: middle;
+  }
+}
+
+/******************************
+TABLE GRID
+******************************/
+.tabletGrid__wrapper
+{
+  position: relative;
+  display: table;
+  width: 100%;
+  content:"";
+
+  &::before
+  {
+    display: table;
+    content:"";
+  }
+
+  &::after
+  {
+    clear: both;
+  }
+
+  [class*="tGrid__"]
+  {
+    position: relative;
+    display: block;
+    min-height: 1px;
+    float: left;
+    background-color: #CC0;
+    width: 33.333333%;
+  }
+}
+
+/******************************
+GRID
+******************************/
+
+
+
+// [class*='coGrid'],
+// [class*='CoGrid']
+// {
+// 	position: relative;
+// 	@include inlineBlock;
+// 	@include box-sizing(border-box);
+//
+// 	vertical-align: top;
+//
+// 	&.vaMiddle
+// 	{
+// 		vertical-align: middle;
+// 	}
+//
+// 	padding: $gridPadding;
+//
+// 	&.np
+// 	{
+// 		padding: 0px;
+// 	}
+//
+// 	&.dNp
+// 	{
+// 		.desktop &
+// 		{
+// 			padding: 0px;
+// 		}
+// 	}
+//
+// 	&.tNp
+// 	{
+// 		.tablet &
+// 		{
+// 			padding: 0px;
+// 		}
+// 	}
+//
+// 	&.mNp
+// 	{
+// 		.mobile &
+// 		{
+// 			padding: 0px;
+// 		}
+// 	}
+//
+// }

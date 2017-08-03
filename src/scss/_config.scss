@@ -1,0 +1,26 @@
+@import "mix";
+
+/*** EXAMPLE ***/
+// $config__text_tc:
+// (
+//   'h1':
+//   (
+//     size: (vw(60, 1920),vw(30, 1920),vw(30, 1920))
+//   ),
+//   'h2':
+//   (
+//     size: (vw(60, 1920),vw(30, 1920),vw(30, 1920))
+//   ),
+//   'h3':
+//   (
+//     size: (vw(60, 1920),vw(30, 1920),vw(30, 1920))
+//   )
+// )!default;
+//
+// @include textStyle__init($config__text);
+// @include textStyle__init($config__text_tc, "lang_tc");
+//
+// .caption
+// {
+// 	@include textStyle(caption);
+// }

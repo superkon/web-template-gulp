@@ -1,0 +1,77 @@
+{
+  "name": "gulptest",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "gem"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-css": "^7.0.0",
+    "jquery": "^3.1.1",
+    "jquery-migrate": "^3.0.0",
+    "slick-carousel": "^1.6.0",
+    "magnific-popup": "^1.1.0",
+    "jquery-selectric": "^1.11.0",
+    "gsap": "^1.19.0",
+    "jScrollPane": "^2.0.23",
+    "inview": "*",
+    "moment": "^2.17.1",
+    "angular": "1.6.5"
+  },
+  "overrides": {
+    "jquery": {
+      "main": [
+        "dist/jquery.min.js"
+      ]
+    },
+    "jquery-migrate": {
+      "main": [
+        "jquery-migrate.min.js"
+      ]
+    },
+    "gsap": {
+      "main": [
+        "src/minified/TweenMax.min.js"
+      ]
+    },
+    "slick-carousel": {
+      "main": [
+        "slick/slick.min.js",
+        "slick/slick.css",
+        "slick/slick-theme.css",
+        "slick/fonts/*"
+      ]
+    },
+    "magnific-popup": {
+      "main": [
+        "dist/jquery.magnific-popup.min.js",
+        "dist/magnific-popup.css"
+      ]
+    },
+    "jquery-selectric": {
+      "main": [
+        "public/jquery.selectric.min.js",
+        "public/selectric.css"
+      ]
+    },
+    "moment": {
+      "main": [
+        "min/moment.min.js"
+      ]
+    },
+    "jScrollPane": {
+      "main": [
+        "script/jquery.jscrollpane.min.js"
+      ]
+    }
+  }
+}
